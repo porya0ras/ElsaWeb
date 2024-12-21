@@ -50,9 +50,7 @@ public class SaveForm : WorkflowBase
                 },
                new WriteLine(context => $"Request received from {requestVariable.Get<Request>(context)!.Owner}."),
                new CreateRequestInDb(context =>requestVariable.Get<Request>(context)),
-               new If(context =>
-               context.GetVariable<bool>("force_reject")
-               )
+               new If(context =>context.GetVariable<bool>("force_reject"))
                {
                    Then=new WriteLine("Request auto rejected!"),
                    Else=_Activities,
