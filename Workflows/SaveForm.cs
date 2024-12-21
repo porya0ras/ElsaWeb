@@ -3,14 +3,17 @@ using Elsa.Workflows;
 using Elsa.Workflows.Activities;
 using Elsa.Workflows.Activities.Flowchart.Activities;
 using Elsa.Workflows.Contracts;
+using Elsa.Workflows.Memory;
+using ElsaWeb.Models;
+using System.Dynamic;
 
-namespace ElsaTest.Workflows;
+namespace ElsaWeb.WorkFlows;
 
-public class SaveForm
-: WorkflowBase
+public class SaveForm: WorkflowBase
 {
     protected override void Build(IWorkflowBuilder builder)
     {
+        var requestVariable = builder.WithVariable<Request>();
 
         builder.Root = new Sequence
         {
@@ -20,39 +23,11 @@ public class SaveForm
                 {
                     Path = new("/save-form"),
                     CanStartWorkflow = true,
+                    ParsedContent = new(requestVariable),
+                    SupportedMethods = new(new[] { HttpMethods.Post }),
+
                 },
-                new WriteHttpResponse
-                {
-                    Content = new("Hello world of HTTP workflows!")
-                },
-                new HttpEndpoint
-                {
-                    Path = new("/hello-world-2"),
-                },
-                new WriteLine("hello-world-3"),
-                new HttpEndpoint
-                {
-                    Path = new("/hello-world-4"),
-                },
-                new Sequence
-                {
-                    Activities =
-                    {
-                        new HttpEndpoint
-                        {
-                            Path = new("/flow-1"),
-                        },
-                         new HttpEndpoint
-                        {
-                            Path = new("/flow-2"),
-                        },
-                          new WriteLine("flow-done"),
-                    }
-                },
-                new WriteHttpResponse
-                {
-                    Content = new("Hello world of HTTP workflows5!")
-                },
+               new WriteLine(context => $"Request received from {requestVariable.Get<Request>(context)!.Owner}."),
             }
         };
     }

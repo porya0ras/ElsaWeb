@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace workflowTest.models;
+namespace ElsaWeb.Models;
 
 public class RequestHistory
 {

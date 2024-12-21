@@ -1,6 +1,6 @@
 using Elsa.Dashboard.Extensions;
 using Elsa.Extensions;
-using ElsaTest.Workflows;
+using ElsaWeb.WorkFlows;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddElsa(elsa =>
