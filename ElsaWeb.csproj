@@ -10,6 +10,7 @@
     <PackageReference Include="Elsa" Version="3.2.3" />
     <PackageReference Include="Elsa.Dashboard" Version="1.5.5.1943" />
     <PackageReference Include="Elsa.Http" Version="3.2.3" />
+    <PackageReference Include="Elsa.Workflows.Api" Version="3.2.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.0" />
   </ItemGroup>
 
